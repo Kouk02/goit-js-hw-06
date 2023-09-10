@@ -12,20 +12,11 @@ const images = [
     alt: 'Group of Horses Running',
   },
 ];
- const ulElement = document.querySelector('.gallery'); // шукаємо список ul
- 
-images.forEach(image => { //Перераховуємо по одному об'єкту вмасиві
-   
-  const liElement = document.createElement('li'); //створюємо на кожен об'єкт свій li елемент
-    liElement.classList.add('grid'); // до кожного li елемента додаємо клас grid з css
-    const img = document.createElement('img'); // створюємо дочірній елемент img, вкладаючи його в li
-    liElement.appendChild(img);
-  
+const ulElement = document.querySelector('.gallery');
+function imageEl(image) {
+  return `<li class="gallery-item"> <img src="${image.url}" alt="${image.alt}" class="gallery-image"> </li>`;
+}
 
-    img.setAttribute('src', image.url); //додаємо в кожен img по одному об'єкту з масиву
-    img.setAttribute('alt', image.alt); 
- 
-  ulElement.insertAdjacentElement('beforeend', liElement); //вкладаємо весь список li в ul 'gallery'
-});
+const galleryHTML = images.map(imageEl).join('');
+ulElement.insertAdjacentHTML('beforeend', galleryHTML);
 
-console.log(ulElement)
